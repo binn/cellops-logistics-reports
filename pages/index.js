@@ -97,7 +97,7 @@ function Home() {
                     <b>Created At</b>
                   </Td>
                   <Td>
-                    {new Date(data.createdAt).toLocaleString()}
+                    {new Date(data.createdAt.replace(' ', '+')).toLocaleString()}
                   </Td>
                 </Tr>
 
@@ -148,7 +148,7 @@ function Home() {
                     <b>Due At</b>
                   </Td>
                   <Td>
-                    {new Date(data.expiration).toLocaleString()}
+                    {new Date(data.expiration.replace(' ', '+')).toLocaleString()}
                   </Td>
                 </Tr>
               </Tbody>
