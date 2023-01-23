@@ -51,6 +51,9 @@ function Home({ incoming }) {
       <Heading>Loading...</Heading>
     )
 
+  if(window !== undefined)
+      window.JSREPORT_READY_TO_START = true;
+
   return (
     <>
       <Box mt={19} h='98vh'>
