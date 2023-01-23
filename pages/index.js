@@ -3,12 +3,14 @@ import { Badge, Box, Center, Checkbox, Heading, HStack, Image, Table, TableCapti
 import { Inter } from '@next/font/google'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react'
+import queryString from "query-string";
 
 const inter = Inter({ subsets: ['latin'] })
 
 function Home() {
   const [data, setData] = useState({});
-  const incoming = (useRouter().query.incoming || undefined);
+  const router = useRouter();
+  const incoming = queryString.parse(router.asPath.split(/\?/)[1])?.incoming;
   // https://www.angelcellular.com/uploads/1/2/4/0/124019334/published/new-logo_2.png?1602712691
 
   useEffect(() => {
@@ -16,7 +18,7 @@ function Home() {
       return;
 
     let dataElement = document.getElementById('DATA').innerText;
-    if(incoming !== undefined && incoming != '')
+    if(incoming !== undefined && incoming !== '')
       dataElement = incoming;
 
     let lot = JSON.parse(dataElement);
