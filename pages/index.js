@@ -224,7 +224,7 @@ function Home({ incoming }) {
   )
 }
 
-Home.getInitialProps = async ({ query }) => {
+Home.getStaticProps = async ({ query }) => {
   const { incoming } = query;
 
   return { incoming };
