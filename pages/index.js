@@ -1,12 +1,14 @@
 import { CheckIcon } from '@chakra-ui/icons';
 import { Badge, Box, Center, Checkbox, Heading, HStack, Image, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import { Inter } from '@next/font/google'
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
-function Home({ incoming }) {
+function Home() {
   const [data, setData] = useState({});
+  const incoming = (useRouter().query.incoming || undefined);
   // https://www.angelcellular.com/uploads/1/2/4/0/124019334/published/new-logo_2.png?1602712691
 
   useEffect(() => {
@@ -225,12 +227,6 @@ function Home({ incoming }) {
       </Box>
     </>
   )
-}
-
-Home.getInitialProps = async ({ query }) => {
-  const { incoming } = query;
-
-  return { incoming };
 }
 
 export default Home;
