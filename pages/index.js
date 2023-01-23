@@ -12,6 +12,7 @@ function Home() {
   const router = useRouter();
   const incoming = queryString.parse(router.asPath.split(/\?/)[1])?.incoming;
   // https://www.angelcellular.com/uploads/1/2/4/0/124019334/published/new-logo_2.png?1602712691
+  // 0f67ffd3-ac9c-4b71-a9a1-fd7ce6f01c6a
 
   useEffect(() => {
     if (document === undefined)
@@ -55,8 +56,14 @@ function Home() {
       <Heading>Loading...</Heading>
     )
 
-  if(window !== undefined)
+  if(window !== undefined) {
       window.JSREPORT_READY_TO_START = true;
+      setTimeout(window.print, 1000);
+
+      window.onafterprint = function() {
+        window.close();
+      }
+  }
 
   return (
     <>
@@ -90,7 +97,7 @@ function Home() {
                     <b>Created At</b>
                   </Td>
                   <Td>
-                    {data.createdAt}
+                    {new Date(data.createdAt).toLocaleString()}
                   </Td>
                 </Tr>
 
@@ -141,7 +148,7 @@ function Home() {
                     <b>Due At</b>
                   </Td>
                   <Td>
-                    {data.expiration}
+                    {new Date(data.expiration).toLocaleString()}
                   </Td>
                 </Tr>
               </Tbody>
