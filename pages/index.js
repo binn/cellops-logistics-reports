@@ -19,7 +19,7 @@ function Home() {
       return;
 
     let dataElement = document.getElementById('DATA').innerText;
-    if(incoming !== undefined && incoming !== '')
+    if (incoming !== undefined && incoming !== '')
       dataElement = incoming;
 
     let lot = JSON.parse(dataElement);
@@ -56,13 +56,13 @@ function Home() {
       <Heading>Loading...</Heading>
     )
 
-  if(window !== undefined) {
-      window.JSREPORT_READY_TO_START = true;
-      setTimeout(window.print, 1000);
+  if (window !== undefined) {
+    window.JSREPORT_READY_TO_START = true;
+    //setTimeout(window.print, 1000);
 
-      window.onafterprint = function() {
-        window.close();
-      }
+    window.onafterprint = function () {
+      window.close();
+    }
   }
 
   return (
@@ -81,6 +81,7 @@ function Home() {
         <Box>
           <Badge colorScheme="red" hidden={!data.late}>LATE</Badge>
           <Badge colorScheme="yellow" hidden={!data.dueSoon}>DUE SOON</Badge>
+          <Badge colorScheme="red" hidden={data.priority !== 4}>PARTIAL NUMBER IMMEDIATE PRIORITY</Badge>
           <Badge colorScheme="red" hidden={data.priority !== 3}>IMMEDIATE PRIORITY</Badge>
           <Badge colorScheme="red" hidden={data.priority !== 2}>URGENT PRIORITY</Badge>
           <Badge hidden={data.priority !== 1}>NORMAL PRIORITY</Badge>
@@ -156,10 +157,10 @@ function Home() {
           </TableContainer>
         </HStack>
 
-        <HStack mt={5} justifyContent='space-evenly'>
+        <HStack mt={2} justifyContent='space-evenly'>
           <TableContainer w='50%'>
-            <Table>
-              <TableCaption>Tasks / Testing</TableCaption>
+            <Table size='sm'>
+              <TableCaption mt={0}>Tasks / Testing</TableCaption>
               <Thead>
                 <Tr>
                   <Th borderColor='gray.400'>Task</Th>
@@ -174,7 +175,7 @@ function Home() {
                         {t.name !== "__HIDDEN" ? t.name : ""}
                       </Td>
                       <Td borderColor={t.name !== "__HIDDEN" ? "gray.400" : "white"}>
-                        <Checkbox checked={t.completed} borderColor={t.name !== "__HIDDEN" ? "black" : "white"}></Checkbox>
+                        <Checkbox size='sm' checked={t.completed} borderColor={t.name !== "__HIDDEN" ? "black" : "white"}></Checkbox>
                       </Td>
                     </Tr>
                   </>)}
@@ -182,8 +183,8 @@ function Home() {
             </Table>
           </TableContainer>
           <TableContainer w='50%' marginInlineStart='0 !important;'>
-            <Table>
-              <TableCaption>Tasks / Grading</TableCaption>
+            <Table size='sm'>
+              <TableCaption mt={0}>Tasks / Grading</TableCaption>
               <Thead>
                 <Tr>
                   <Th borderColor='gray.400'>Task</Th>
@@ -198,7 +199,7 @@ function Home() {
                         {t.name !== "__HIDDEN" ? t.name : ""}
                       </Td>
                       <Td borderColor="gray.400">
-                        <Checkbox checked={t.completed} borderColor={t.name !== "__HIDDEN" ? "black" : "white"}></Checkbox>
+                        <Checkbox size='sm' checked={t.completed} borderColor={t.name !== "__HIDDEN" ? "black" : "white"}></Checkbox>
                       </Td>
                     </Tr>
                   </>)}
@@ -207,23 +208,28 @@ function Home() {
           </TableContainer>
         </HStack>
 
-        <TableContainer mt={5}>
-          <Table>
-            <TableCaption mt={0}>Lot Departments</TableCaption>
+        <TableContainer mt={2}>
+          <Table >
+            <TableCaption mt={0}>Notes</TableCaption>
             <Thead>
               <Tr>
-                <Th borderColor="gray.400">Department Name</Th>
-                <Th borderColor="gray.400"># of items</Th>
+                <Th borderColor="gray.400">Created By</Th>
+                <Th borderColor="gray.400">Time</Th>
+                <Th borderColor="gray.400">Note</Th>
               </Tr>
             </Thead>
             <Tbody>
-              {data.assignments.map(d =>
+              {data.notes.map(d =>
                 <>
                   <Tr>
                     <Td borderColor="gray.400">
-                      {d.name}
+                      {d.createdBy}
                     </Td>
                     <Td borderColor="gray.400">
+                      {(new Date(d.timestamp)).toLocaleString()}
+                    </Td>
+                    <Td borderColor="gray.400">
+                      {d.data.split('\n').map(e => <><p>{e}</p></>)}
                     </Td>
                   </Tr>
                 </>)}
