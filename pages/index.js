@@ -58,7 +58,7 @@ function Home() {
 
   if (window !== undefined) {
     window.JSREPORT_READY_TO_START = true;
-    //setTimeout(window.print, 1000);
+    setTimeout(window.print, 1000);
 
     window.onafterprint = function () {
       window.close();
@@ -79,8 +79,8 @@ function Home() {
         </HStack>
 
         <Box>
-          <Badge colorScheme="red" hidden={!data.late}>LATE</Badge>
-          <Badge colorScheme="yellow" hidden={!data.dueSoon}>DUE SOON</Badge>
+          <Badge colorScheme="red" hidden={!data.late} mr={2}>LATE</Badge>
+          <Badge colorScheme="yellow" hidden={!data.dueSoon} mr={2}>DUE SOON</Badge>
           <Badge colorScheme="red" hidden={data.priority !== 4}>PARTIAL NUMBER IMMEDIATE PRIORITY</Badge>
           <Badge colorScheme="red" hidden={data.priority !== 3}>IMMEDIATE PRIORITY</Badge>
           <Badge colorScheme="red" hidden={data.priority !== 2}>URGENT PRIORITY</Badge>
