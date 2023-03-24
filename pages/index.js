@@ -58,7 +58,7 @@ function Home() {
 
   if (window !== undefined) {
     window.JSREPORT_READY_TO_START = true;
-    setTimeout(window.print, 1000);
+    //setTimeout(window.print, 1000);
 
     window.onafterprint = function () {
       window.close();
@@ -175,7 +175,7 @@ function Home() {
                         {t.name !== "__HIDDEN" ? t.name : ""}
                       </Td>
                       <Td borderColor={t.name !== "__HIDDEN" ? "gray.400" : "white"}>
-                        <Checkbox size='sm' checked={t.completed} borderColor={t.name !== "__HIDDEN" ? "black" : "white"}></Checkbox>
+                        <Checkbox size='sm' isChecked={t.completed} borderColor={t.name !== "__HIDDEN" ? "black" : "white"}></Checkbox>
                       </Td>
                     </Tr>
                   </>)}
@@ -199,7 +199,7 @@ function Home() {
                         {t.name !== "__HIDDEN" ? t.name : ""}
                       </Td>
                       <Td borderColor="gray.400">
-                        <Checkbox size='sm' checked={t.completed} borderColor={t.name !== "__HIDDEN" ? "black" : "white"}></Checkbox>
+                        <Checkbox size='sm' isChecked={t.completed} borderColor={t.name !== "__HIDDEN" ? "black" : "white"}></Checkbox>
                       </Td>
                     </Tr>
                   </>)}
